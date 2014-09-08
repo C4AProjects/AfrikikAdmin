@@ -1,4 +1,3 @@
-AfrikikAdmin
-============
+Afrikik Admin
 
-This is the back end of afrikik mobile application
+Back end for Afrikik mobile application

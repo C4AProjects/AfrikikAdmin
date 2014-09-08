@@ -9,33 +9,33 @@
       </div>
       <div class="well tab-primary ui-tabs">
         <ul class="nav nav-tabs ui-tabs-nav">
-          <li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-          <li><a href="#feeds" data-toggle="tab">Feeds</a></li>
+          <li class="active"><a href="#phome" data-toggle="tab">Profile</a></li>
+          <li><a href="#pfeeds" data-toggle="tab">Feeds</a></li>
           <!-- <li><a href="#image" data-toggle="tab">Upload</a></li> -->
-          <li><a href="#stats" data-toggle="tab">Stats</a></li>
+          <li><a href="#pstats" data-toggle="tab">Stats</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
-          <div class="tab-pane active in" id="home">
+          <div class="tab-pane active in" id="phome">
             <form id="profileTab">
               <div>
                 <div class="span6">
-                
+
                   <label>Picture</label>
                   <img width="150px" height="150px" role="button" data-bind="attr: { alt: model().name, src: model().img_url() }">
 <label>Rating</label>
                 <input type="hidden" id="playerRating" data-bind="value:model().rating"/>
                   <label>Name</label>
                   <input type="text" placeholder="Name of the player" name="name" class="input-xlarge" data-bind="value: model().name" />
-                 
+
                   <label>Club</label>
                   <input type="text" placeholder="Club" name="Club" class="input-xlarge" data-bind="value: model().club" />
 <label>Number</label>
                   <input type="text" placeholder="Player number" name="name" class="input-xlarge" data-bind="value: model().no" />
-                 
+
                   <label>Club Country</label>
                   <input type="text" placeholder="Club Country" name="Club" class="input-xlarge" data-bind="value: model().clubcountry" />
 
-                  
+
                 </div>
                 <div class="span6">
 <label>Country(Nationality)</label>
@@ -48,7 +48,7 @@
 
                   <label>Birthdate (<span data-bind="date: model().dob, format:'DD MMM YYYY'"></span>)</label>
 
-                  <input type="text" placeholder="Birth Date" id="datepicker" name="Birth Date" class="input-xlarge hasDatepicker datepicker" data-bind="value: model().dob" />                                     
+                  <input type="text" placeholder="Birth Date" id="datepicker" name="Birth Date" class="input-xlarge hasDatepicker datepicker" data-bind="value: model().dob" />
                   <label>Place of Birth</label>
                   <input type="text" placeholder="Place of birth" name="Weight" class="input-xlarge" data-bind="value: model().birth_place" />
 
@@ -75,7 +75,7 @@
 
                     <!-- <div class="tab-pane" id="image">
                         <form id="Form1">
-                    
+
                             <div class="span6">
                                 <div class="form-inline">
                                     <span data-bind="html: 'Player ID: ' + model().id()" />
@@ -83,14 +83,14 @@
                                     <input id="uploadBtn" type="submit" class="btn" value="Upload" data-bind="click: upload">
                                 </div>
                             </div>
-                    
+
                         </form>
                       </div> -->
 
-                      <div class="tab-pane" id="feeds">
+                      <div class="tab-pane" id="pfeeds">
                         <div class="span6">
                           <div class="btn-toolbar">
-                            <div class="form-inline">                                
+                            <div class="form-inline">
                               <div>
                                 <textarea rows="5" class="span10" data-bind="value: comment"></textarea>
                                 <br />
@@ -104,7 +104,7 @@
 
                               <li>
 
-                                <span class="message">                                                
+                                <span class="message">
                                   <span class="time" data-bind="text: moment(published()).fromNow()">Jul 25, 2012 11:09</span>
                                   <span class="text" data-bind="text: message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                   </span>
@@ -118,7 +118,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="tab-pane" id="stats">
+                      <div class="tab-pane" id="pstats">
 
                        <label>Season</label>
                        <input type="text" placeholder="Season" name="Weight" class="input-xlarge" data-bind="value: stat().season" />

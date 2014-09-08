@@ -8,7 +8,7 @@
     var playerId = ko.observable(0);
 
     var isBusy = ko.observable(false);
-    
+
 
     function activate() {
         getPlayers();
@@ -16,25 +16,25 @@
         return true;
     }
 
-   
+
 
     var gotoDetails = function (selectedPlayer) {
         if (selectedPlayer) {
             var url = '#/player/' + selectedPlayer.id();
             router.navigate(url);
         }
-    }; 
+    };
     var getPlayers = function () {
         datacontext.getPlayers(function (data, error) {
-            if (error == false) {
+            if (error === false) {
                 //map according to model
-                var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item) });
+                var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item); });
                 players(mappedPlayers);
             }
         });
-    }
+    };
      var onComplete = function (result, error) {
-       if (error == false) {
+       if (error === false) {
         logger.log(' Player Deleted', null, title, true);
         getPlayers();
     }
@@ -44,12 +44,12 @@ var DeletePlayer = function (selectedPlayer) {
         app.showMessage('Are you sure you want to Delete the player?', 'Delete Player', ['Yes', 'No'])
 .then(function(dialogResult){
     if(dialogResult === "Yes"){
-        return datacontext.deletePlayer(selectedPlayer.id(), onComplete)
+        datacontext.deletePlayer(selectedPlayer.id(), onComplete);
         app.showMessage('Player Deleted');
-    }    
+    }
 });
 
-            
+
         }
     };
 
@@ -77,7 +77,7 @@ var DeletePlayer = function (selectedPlayer) {
             var start = pageIndex() * size;
             return players().slice(start, start + size);
         });
-        
+
         var maxPageIndex = ko.dependentObservable(function () {
             return Math.ceil(players().length / pageSize()) - 1;
         });
@@ -112,7 +112,7 @@ var DeletePlayer = function (selectedPlayer) {
             if (searchText() && (s0.length > 0) ) s0 = searchText();
             return datacontext.searchPlayers(s0, onRetrieve);
 
-        }
+        };
         var loadPlayersByCountry=function(){
             app.trigger('busy', true);
             var pId = 0;
@@ -121,7 +121,7 @@ var DeletePlayer = function (selectedPlayer) {
             if (searchText() && (s0.length > 0) ) s0 = searchText();
             return datacontext.searchPlayersByCountry(s0, onRetrieve);
 
-        }
+        };
         var loadPlayersByClub=function(){
             app.trigger('busy', true);
             var pId = 0;
@@ -130,19 +130,19 @@ var DeletePlayer = function (selectedPlayer) {
             if (searchText() && (s0.length > 0) ) s0 = searchText();
             return datacontext.searchPlayersByClub(s0, onRetrieve);
 
-        }
+        };
 
         var onRetrieve = function (data, error) {
-         if (error == false) {
+         if (error === false) {
             //map according to model
-            var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item) });
+            var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item); });
             players(mappedPlayers);
         }
-        app.trigger('busy', false);           
+        app.trigger('busy', false);
 
     };
 
-        //Run when navigating to another view        
+        //Run when navigating to another view
         var addNew = function () {
             var url = '#/player/0';
                 router.navigate(url);
@@ -150,8 +150,8 @@ var DeletePlayer = function (selectedPlayer) {
 var refresh = function () {
             getPlayers();
         };
-       
-        var canActivate = function () {            
+
+        var canActivate = function () {
             return true;
         };
 
@@ -177,7 +177,7 @@ var vm = {
             moveToPage: moveToPage,
             pageIndex: pageIndex,
             maxPageIndex: maxPageIndex,
-            
+
     //#endregion
             DeletePlayer: DeletePlayer
         };

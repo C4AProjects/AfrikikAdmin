@@ -1,23 +1,29 @@
 ﻿// Maps the files so Durandal knows where to find these.
-require.config({
+
+requirejs.config({
     paths: {
-        'text': '../Scripts/text',
-        'durandal': '../Scripts/durandal',
-        'plugins': '../Scripts/durandal/plugins',
-        'transitions': '../Scripts/durandal/transitions',
-        'mapping': '../Scripts/knockout.mapping-latest.debug'
+        'text': '../lib/require/text',
+        'durandal':'../lib/durandal/js',
+        'plugins' : '../lib/durandal/js/plugins',
+        'transitions' : '../lib/durandal/js/transitions',
+
+        'bootstrap': '../lib/bootstrap/js/bootstrap',
+        'viewmodel': '../lib/custom-libs/knockout.viewmodel'
     },
     shim: {
-        'mapping': {
+        'viewmodel': {
             deps: ['knockout']
-        }
+        },
+        'bootstrap': {
+            deps: ['jquery'],
+            exports: 'jQuery'
+       }
     }
 });
-
-// Durandal 2.x assumes no global libraries. It will ship expecting 
-// Knockout and jQuery to be defined with requirejs. .NET 
+// Durandal 2.x assumes no global libraries. It will ship expecting
+// Knockout and jQuery to be defined with requirejs. .NET
 // templates by default will set them up as standard script
-// libs and then register them with require as follows: 
+// libs and then register them with require as follows:
 define('jquery', function () { return jQuery; });
 define('knockout', ko);
 
@@ -25,7 +31,7 @@ define(['durandal/app', 'durandal/viewLocator', 'durandal/system', 'plugins/rout
 
 function boot (app, viewLocator, system, router, logger) {
 
-    // Enable debug message to show in the console 
+    // Enable debug message to show in the console
     system.debug(true);
 
     app.title = 'Afrikik Admin';
@@ -34,20 +40,20 @@ function boot (app, viewLocator, system, router, logger) {
         router: true,
         dialog: true
     });
-    
+
     app.start().then(function () {
         toastr.options.positionClass = 'toast-bottom-right';
         toastr.options.backgroundpositionClass = 'toast-bottom-right';
 
-        // When finding a viewmodel module, replace the viewmodel string 
+        // When finding a viewmodel module, replace the viewmodel string
         // with view to find it partner view.
         // [viewmodel]s/sessions --> [view]s/sessions.html
-        // Defaults to viewmodels/views/views. 
+        // Defaults to viewmodels/views/views.
         // Otherwise you can pass paths for modules, views, partials
         viewLocator.useConvention();
-        
+
         //Show the app by setting the root view model for our application.
         //app.setRoot('viewmodels/shell', 'entrance');
         app.setRoot('viewmodels/login');
     });
-};
+}

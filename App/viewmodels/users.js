@@ -6,9 +6,9 @@
 var searchText = ko.observable("");
 var userId = ko.observable(0);
         datacontext.getUsers(function (data, error) {
-            if (error == false) {
+            if (error === false) {
                 //map according to model
-                var mappedUsers = $.map(data, function (item) { return new models.UserModel(item) });
+                var mappedUsers = $.map(data, function (item) { return new models.UserModel(item); });
                 users(mappedUsers);
             }
         });
@@ -20,12 +20,12 @@ var userId = ko.observable(0);
             return true;
         }
         var onRetrieve = function (data, error) {
-       if (error == false) {
+       if (error === false) {
             //map according to model
-            var mappedUsers = $.map(data, function (item) { return new models.UserModel(item) });
+            var mappedUsers = $.map(data, function (item) { return new models.UserModel(item); });
             users(mappedUsers);
         }
-    }
+    };
 var loadUsers=function(){
         app.trigger('busy', true);
         var uId = 0;
@@ -34,7 +34,7 @@ var loadUsers=function(){
         if (searchText() && (s0.length > 0) ) s0 = searchText();
         return datacontext.searchUsers(s0, onRetrieve);
 
-    }
+    };
 
         //#endregion
 
@@ -90,11 +90,11 @@ var moveToPage = function (index) {
             moveToPage: moveToPage,
             pageIndex: pageIndex,
             maxPageIndex: maxPageIndex,
-            
+
             //#endregion
     };
 
     return vm;
 
-  
+
 });

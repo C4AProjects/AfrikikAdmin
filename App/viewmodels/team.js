@@ -7,14 +7,14 @@
         var feeds = ko.observableArray([]);
         var players = ko.observableArray([]);
         var newTeam = ko.observable(false);
-        var stat = ko.observable();      
-        
-        //var mytest= ko.observable(); 
+        var stat = ko.observable();
+
+        //var mytest= ko.observable();
         var comment = ko.observable();
         //Run when viewmodel is called
         var activate = function (id) {
 
-            if (id == 0) {
+            if (id === 0) {
                 //create new Person model
                 title = "New National Team";
                 newTeam(true);
@@ -34,22 +34,22 @@
             }
         };
         var onFeedRetrieve = function (data, error) {
-           
+
             if (error === false) {
-                var mappedFeeds = $.map(data, function (item) { return new models.TeamFeedModel(item) });
+                var mappedFeeds = $.map(data, function (item) { return new models.TeamFeedModel(item); });
                 feeds(mappedFeeds);
             }
         };
         var onPlayersRetrieve = function (data, error) {
             if (error === false) {
-                var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item) });
+                var mappedPlayers = $.map(data, function (item) { return new models.PlayerModel(item); });
                 players(mappedPlayers);
             }
         };
 
         var onStatRetrieve = function (data, error) {
-            if (error === false) {               
-                
+            if (error === false) {
+
                 var test=ko.viewmodel.fromModel(data);
                 console.log(test);
                 stat(test);
@@ -68,7 +68,7 @@
         self.postFeed = function () {
             //createComFeed();
             datacontext.createTeamFeed(model().id(), comment, function (data, error) {
-                if (error == false) {
+                if (error === false) {
                     //map according to model
                     logger.log('Posted Successfully', null, title, true);
                     datacontext.getTeamFeeds(model().id(), onFeedRetrieve, true);
@@ -111,7 +111,7 @@
             router.navigate(url);
             }
             if (error === true) {
-                logger.log('Team Could Not Be Saved, Please Try Again', null, title, true);                
+                logger.log('Team Could Not Be Saved, Please Try Again', null, title, true);
             }
         };
         //Run when navigating to another view
@@ -147,7 +147,7 @@
                 app.showMessage('Are you sure you want to Delete this post?', 'Delete Post', ['Yes', 'No'])
         .then(function (dialogResult) {
             if (dialogResult === "Yes") {
-                return datacontext.deleteFeed(selectedFeed.id(), onComplete)
+                return datacontext.deleteFeed(selectedFeed.id(), onComplete);
             }
         });
 
@@ -155,9 +155,9 @@
         };
 
         var onComplete = function (result, error) {
-            if (error == false) {
+            if (error === false) {
                 logger.log(' Post Deleted', null, title, true);
-                datacontext.getTeamFeeds(model().id(), onFeedRetrieve, true)
+                datacontext.getTeamFeeds(model().id(), onFeedRetrieve, true);
             }
         };
         var addNew = ko.asyncCommand({
@@ -189,8 +189,7 @@
             postFeed: postFeed,
             deleteFeed: deleteFeed,
             stat:stat,
-            players:players,
-            stat:stat
+            players:players
         };
 
         return vm;

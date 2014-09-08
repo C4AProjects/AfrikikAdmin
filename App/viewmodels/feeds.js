@@ -3,29 +3,29 @@
     var self = this;
     var feeds = ko.observableArray([]);
     var comment = ko.observable();
-    
+
     var isBusy = ko.observable(false);
 
-    
+
     function activate() {
-        getComFeeds();        
+        getComFeeds();
         logger.log(title + ' View Activated', null, title, true);
         return true;
     }
-   
+
     var getComFeeds = function () {
         datacontext.getComFeeds(function (data, error) {
-            if (error == false) {
+            if (error === false) {
                 //map according to model
-                var mappedFeeds = $.map(data, function (item) { return new models.FeedModel(item) });
+                var mappedFeeds = $.map(data, function (item) { return new models.FeedModel(item); });
                 feeds(mappedFeeds);
             }
         });
     };
 
-    
+
      var onComplete = function (result, error) {
-       if (error == false) {
+       if (error === false) {
            logger.log(' Comment Deleted', null, title, true);
            getComFeeds();
     }
@@ -33,12 +33,12 @@
      self.refresh = function () {
          getComFeeds();
      };
-    
+
 
      self.postFeed = function () {
          //createComFeed();
          datacontext.createComFeed(comment, function (data, error) {
-             if (error == false) {
+             if (error === false) {
                  //map according to model
                  logger.log('Posted Successfully', null, title, true);
                  getComFeeds();
@@ -52,7 +52,7 @@
              app.showMessage('Are you sure you want to Delete this comment?', 'Delete Comment', ['Yes', 'No'])
      .then(function (dialogResult) {
          if (dialogResult === "Yes") {
-             return datacontext.deleteFeed(selectedFeed.id(), onComplete)
+             return datacontext.deleteFeed(selectedFeed.id(), onComplete);
          }
      });
 
@@ -72,19 +72,19 @@
         });
     };
 
-        
+
         var onRetrieve = function (data, error) {
-         if (error == false) {
+         if (error === false) {
             //map according to model
-            var mappedFeeds = $.map(data, function (item) { return new models.FeedModel(item) });
+            var mappedFeeds = $.map(data, function (item) { return new models.FeedModel(item); });
             feeds(mappedFeeds);
         }
-        app.trigger('busy', false);           
+        app.trigger('busy', false);
 
     };
 
 var vm = {
-    activate: activate,    
+    activate: activate,
     attached: attached,
     title: title,
     feeds: feeds,
@@ -93,7 +93,7 @@ var vm = {
     comment: comment,
     postFeed: postFeed,
     deleteFeed: deleteFeed,
-   
+
         };
 
         return vm;

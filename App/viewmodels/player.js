@@ -15,8 +15,8 @@
 
 
         //Run when viewmodel is called
-        var activate = function (id) {           
-            if (id == 0) {
+        var activate = function (id) {
+            if (id === 0) {
                 //create new Person model
                 title("New Player");
                 //return datacontext.createPlayer(onRetrieve, true);
@@ -26,13 +26,13 @@
             else {
                 return datacontext.getPlayerById(id, onRetrieve, true).then(datacontext.getPlayerStats(id, onStatRetrieve, true)).then(datacontext.getPlayerFeeds(id, onFeedRetrieve, true));
 
-            }             
+            }
         };
 
         self.postFeed = function () {
             //createComFeed();
             datacontext.createPlayerFeed(model().id(), comment, function (data, error) {
-                if (error == false) {
+                if (error === false) {
                     //map according to model
                     logger.log('Posted Successfully', null, title, true);
                     datacontext.getPlayerFeeds(model().id(), onFeedRetrieve, true);
@@ -53,7 +53,7 @@
         };
         var onFeedRetrieve = function (data, error) {
             if (error === false) {
-                var mappedFeeds = $.map(data, function (item) { return new models.PlayerFeedModel(item) });
+                var mappedFeeds = $.map(data, function (item) { return new models.PlayerFeedModel(item); });
                 feeds(mappedFeeds);
             }
         };
@@ -62,7 +62,7 @@
                 if(data[0])
                     stat(new models.StatModel(data[0]));
                 else {
-                    stat(new models.StatModel());                    
+                    stat(new models.StatModel());
                     stat().team(model().club());
                     stat().player(model().id());
                     datacontext.createPlayerStats(stat, onStatCreated);
@@ -82,14 +82,14 @@
         };
 
         var save = function () {
-            datacontext.updatePlayerStats(stat().id(),stat,onStatsUpdated)
+            datacontext.updatePlayerStats(stat().id(),stat,onStatsUpdated);
             return datacontext.updatePlayer(model, onSave, true);
         };
         var onStatsUpdated = function (data, error) {
             if (error === false) {
                 logger.log('Stats Updated', null, title, true);
             }
-        }
+        };
         var onSave = function (data, error) {
             if (error === false) {
                 logger.log('Player Saved', null, title, true);
@@ -97,7 +97,7 @@
                 router.navigate(url);
             }
             if (error === true) {
-                logger.log('Player Could Not Be Saved, Please Try Again', null, title, true);                
+                logger.log('Player Could Not Be Saved, Please Try Again', null, title, true);
             }
         };
 
@@ -105,14 +105,14 @@
             if (error === false) {
                 //Set newPlayer to false after player created Successfully
                 //this is loaded in the memory so next time user come back this viewmodel
-                //newPlayer must be set to false if not players will be duplicated                
+                //newPlayer must be set to false if not players will be duplicated
                 newPlayer(false);
                 logger.log('Player Saved', null, title, true);
                 var url = '#/players';
                 router.navigate(url);
             }
             if (error === true) {
-                logger.log('Player Could Not Be Created, Please Try Again', null, title, true);                
+                logger.log('Player Could Not Be Created, Please Try Again', null, title, true);
             }
         };
         //Run when navigating to another view
@@ -125,7 +125,7 @@
              app.showMessage('Are you sure you want to Delete this post?', 'Delete Post', ['Yes', 'No'])
              .then(function (dialogResult) {
                  if (dialogResult === "Yes") {
-                     return datacontext.deleteFeed(selectedFeed.id(), onComplete)
+                     return datacontext.deleteFeed(selectedFeed.id(), onComplete);
                  }
              });
 
@@ -133,7 +133,7 @@
      };
 
      var onComplete = function (result, error) {
-         if (error == false) {
+         if (error === false) {
              logger.log(' Post Deleted', null, title, true);
              datacontext.getPlayerFeeds(model().id(), onFeedRetrieve, true);
          }
@@ -179,7 +179,7 @@
             create: create,
             save:save,
             cancel: cancel,
-            title: title,            
+            title: title,
             upload: upload,
             newPlayer: newPlayer,
             feeds: feeds,

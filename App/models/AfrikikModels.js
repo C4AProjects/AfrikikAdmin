@@ -2,7 +2,7 @@
     var limit = 13;
     var shortText = function (limit, text) {
         return ((text && text.length > limit) ? text.substring(0, limit) + '...' : text);
-    }
+    };
     var PlayerModel=function(data) {
         if (!data)
         {
@@ -35,8 +35,26 @@
         this.shortClub = ko.computed(function () {
             return shortText(limit, data.club);
         });
-    }
-
+    };
+    var ScoreModel = function (data) {
+        if (!data) {
+            data = {};
+        }
+        this._team1 = ko.observable(data._team1);
+        this._team2 = ko.observable(data._team2);
+        this.no_afrik_team1 = ko.observable(data.no_afrik_team1);
+        this.no_afrik_team2 = ko.observable(data.no_afrik_team2);
+        this.playersTeam1 = ko.observable(data.playersTeam1);
+        this.playersTeam2 = ko.observable(data.playersTeam2);
+        this.referees = ko.observableArray(data.referees);
+        this.dateMatch = ko.observable(data.dateMatch);
+        this.competition = ko.observable(data.competition);
+        this.details = ko.observable(data.details);
+        this.summary_video = ko.observable(data.summary_video);
+        this.scoreTeam1 = ko.observable(data.scoreTeam1);
+        this.scoreTeam2 = ko.observable(data.scoreTeam2);
+        this.status = ko.observable(data.status);
+    };
     var StatModel = function (data) {
         if (!data) {
             data = {};
@@ -52,8 +70,8 @@
         this.player = ko.observable(data._player);
         this.league = ko.observable(data.league);
         this.goals = ko.observable(data.goals);
-    }
-    
+    };
+
     var NationalTeamModel = function (data) {
         if (!data)
         {
@@ -72,8 +90,8 @@
         this.shortName = ko.computed(function () {
             return shortText(limit, data.name);
         });
-        
-    }
+
+    };
     var ClubModel = function (data) {
         if (!data) {
             data = {};
@@ -85,12 +103,12 @@
         this.location = ko.observable(data.location);
         this.id = ko.observable(data._id);
         //compose full image url
-        this.picture = ko.observable(config.imageSettings.imageBasePath + data.picture);        
+        this.picture = ko.observable(config.imageSettings.imageBasePath + data.picture);
         this.shortName = ko.computed(function () {
             return shortText(limit, data.name);
         });
 
-    }
+    };
     var UserModel = function (data) {
         if (!data)
         {
@@ -105,7 +123,7 @@
         this.shortEmail = ko.computed(function () {
             return shortText(limit, data.email);
         });
-    }
+    };
 
 
     var FeedModel = function (data){
@@ -139,8 +157,9 @@
         FeedModel: FeedModel,
         PlayerFeedModel: PlayerFeedModel,
         TeamFeedModel: TeamFeedModel,
-        StatModel: StatModel
+        StatModel: StatModel,
+        ScoreModel:ScoreModel
     };
 
-    
+
 });

@@ -21,7 +21,7 @@
     };
 
     var onComplete = function (result, error) {
-       if (error == false) {
+     if (error === false) {
         logger.log(' Team Deleted', null, title, true);
     }
 };
@@ -29,48 +29,51 @@
 var DeleteTeam = function (selectedTeam) {
     if (selectedTeam) {
         app.showMessage('Are you sure you want to Delete the team?', 'Delete Team', ['Yes', 'No'])
-.then(function(dialogResult){
-    if(dialogResult === "Yes"){
+        .then(function(dialogResult){
+            if(dialogResult === "Yes"){
         //return datacontext.deleteTeam(selectedTeam.id(),onComplete)
         app.showMessage('Team Deleted');
-    }    
+    }
 });
 
-            
-        }
-    };
+
+    }
+};
 var getTeams = function () {
     datacontext.getTeams(function (data, error) {
-        if (error == false) {
+        if (error === false) {
             //map according to model
-            var mappedTeams = $.map(data, function (item) { return new models.ClubModel(item) });
+            var mappedTeams = $.map(data,
+                function (item) {
+                   return new models.ClubModel(item);
+               });
             teams(mappedTeams);
         }
     });
-}
+};
 
-    var GetClubs = ko.computed(function () {
-        var filteredCollection = ko.utils.arrayFilter(teams(), function (item) {
-            var c = item.country();
-            if(c!=undefined)
+var GetClubs = ko.computed(function () {
+    var filteredCollection = ko.utils.arrayFilter(teams(), function (item) {
+        var c = item.country();
+        if(c!==undefined)
             return c.length>0;
-        });
-        return filteredCollection;
     });
+    return filteredCollection;
+});
 
-    var NationalTeamsCount = ko.computed(function () {
-        return GetClubs().length;
-    });
+var NationalTeamsCount = ko.computed(function () {
+    return GetClubs().length;
+});
 
 
-    var onRetrieve = function (data, error) {
-        if (error == false) {
-            app.trigger('busy', false);
+var onRetrieve = function (data, error) {
+    if (error === false) {
+        app.trigger('busy', false);
             //map according to model
-            var mappedTeams = $.map(data, function (item) { return new models.ClubModel(item) });
+            var mappedTeams = $.map(data, function (item) { return new models.ClubModel(item); });
             teams(mappedTeams);
         }
-    }
+    };
     var loadTeams=function(){
         app.trigger('busy', true);
         var pId = 0;
@@ -78,7 +81,7 @@ var getTeams = function () {
         if (teamId()) pId = teamId();
         if (searchText() && (s0.length > 0) ) s0 = searchText();
         return datacontext.searchTeams(s0, onRetrieve);
-    }
+    };
 
 
     var attached = function (view) {
@@ -145,7 +148,7 @@ var moveToPage = function (index) {
         }
     });
 
-    var canActivate = function () {            
+    var canActivate = function () {
         return true;
     };
 
@@ -169,7 +172,7 @@ var moveToPage = function (index) {
             moveToPage: moveToPage,
             pageIndex: pageIndex,
             maxPageIndex: maxPageIndex,
-            
+
             //#endregion
         };
 

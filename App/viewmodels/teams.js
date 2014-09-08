@@ -15,7 +15,7 @@
     };
 
     var onComplete = function (result, error) {
-     if (error == false) {
+     if (error === false) {
         logger.log(' Team Deleted', null, title, true);
     }
 };
@@ -27,14 +27,14 @@ var DeleteTeam = function (selectedTeam) {
             if(dialogResult === "Yes"){
         //return datacontext.deleteTeam(selectedTeam.id(),onComplete)
         app.showMessage('Team Deleted');
-    }    
+    }
 });
     }
 };
 
 var GetNationalTeams = ko.computed(function () {
     var filteredCollection = ko.utils.arrayFilter(teams(), function (item) {
-        return item.nationalTeam() == true;
+        return item.nationalTeam() === true;
     });
     return filteredCollection;
 });
@@ -45,22 +45,22 @@ var GetNationalTeams = ko.computed(function () {
 
  var getTeams = function () {
      datacontext.getTeams(function (data, error) {
-         if (error == false) {
+         if (error === false) {
              //map according to model
-             var mappedTeams = $.map(data, function (item) { return new models.NationalTeamModel(item) });
+             var mappedTeams = $.map(data, function (item) { return new models.NationalTeamModel(item); });
              teams(mappedTeams);
          }
      });
- }
+ };
 
 var onRetrieve = function (data, error) {
-    if (error == false) {
+    if (error === false) {
         app.trigger('busy', false);
             //map according to model
-        var mappedTeams = $.map(data, function (item) { return new models.NationalTeamModel(item) });
+        var mappedTeams = $.map(data, function (item) { return new models.NationalTeamModel(item); });
             teams(mappedTeams);
         }
-    }
+    };
     var searchTeams=function(){
         app.trigger('busy', true);
         var pId = 0;
@@ -69,7 +69,7 @@ var onRetrieve = function (data, error) {
         if (searchText() && (s0.length > 0) ) s0 = searchText();
         return datacontext.searchTeams(s0, onRetrieve);
 
-    }
+    };
 
 
     var attached = function (view) {
@@ -139,7 +139,7 @@ var moveToPage = function (index) {
         }
     });
 
-    var canActivate = function () {            
+    var canActivate = function () {
         return true;
     };
 
@@ -167,7 +167,7 @@ var moveToPage = function (index) {
             moveToPage: moveToPage,
             pageIndex: pageIndex,
             maxPageIndex: maxPageIndex,
-            
+
         //#endregion
             refresh: refresh
         };
