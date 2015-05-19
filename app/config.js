@@ -3,10 +3,10 @@
     toastr.options.positionClass = 'toast-bottom-right';
 
 
-    var apiUrl = "http://m-afrikik.c4adev.co.vu:2014/api/v1/";
+    var apiUrl = "http://api.afrikik.com/api/v1/";
 
     var imageSettings = {
-        imageBasePath: 'http://m-afrikik.c4adev.co.vu:2014/uploads/',
+        imageBasePath: 'http://api.afrikik.com/uploads/',
         unknownPlayerImageSource: 'nopic-player.png',
         unknownTeamImageSource: 'nopic-team.png'
     };
