@@ -1,0 +1,48 @@
+<section>
+    <h2 class="page-title" data-bind="text: title"></h2>
+
+    <div class="container-fluid" style="margin-bottom: 60px;">
+        <div class="row-fluid">
+
+            <div class="btn-toolbar">
+                <div class="form-horizontal">
+
+                    <button class="btn btn-success" data-bind="click: refresh"><i class="icon-repeat"></i>Reload</button>
+
+                </div>
+                <div>
+                    <textarea rows="5" class="span4" data-bind="value: comment"></textarea>
+                    <br />
+                    <button class="btn btn-success" data-bind="click: postFeed"><i class="icon-circle-arrow-right"></i>Post</button>
+
+                </div>
+
+            </div>
+            <div class="box black noMargin span6" ontablet="span5" ondesktop="span5" style="margin-left: 5px;">
+                <div class="box-header">
+                    <h2><i class="halflings-icon white list"></i><span class="break"></span>Community Feeds</h2>
+
+                </div>
+                <div class="box-content">
+                    <ul class="chat metro green" data-bind="foreach: feeds">
+
+                        <li class="left">
+                            <img class="avatar" data-bind="attr: { alt: user().name }" src="./content/images/user.png">
+                            <span class="message"><span class="arrow"></span>
+                                <span class="from" data-bind="text: user().name">Dennis Ji</span>
+                                <span class="time" data-bind="text: moment(published()).fromNow()">Jul 25, 2012 11:09</span>
+                                <span class="text" data-bind="text: message">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                </span>
+                                <span class="feed-close">
+                                    <a data-bind="click: deleteFeed" role="button" class="btn-close"><i class="halflings-icon white remove"></i></a>
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
